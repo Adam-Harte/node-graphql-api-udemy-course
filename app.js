@@ -50,7 +50,8 @@ app.use((req, res, next) => {
 
 app.use('/graphql', grahpqlHttp({
   schema: graphqlSchema,
-  rootValue: graphqlResolvers
+  rootValue: graphqlResolvers,
+  graphiql: true
 }));
 
 app.use((error, req, res, next) => {
