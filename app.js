@@ -5,8 +5,10 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const multer = require('multer');
 const grahpqlHttp = require('express-graphql');
+
 const graphqlSchema = require('./graphql/schema');
 const graphqlResolvers = require('./graphql/resolvers');
+const isAuth = require('./middleware/is-auth');
 
 const app = express();
 
@@ -47,6 +49,8 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   next();
 });
+
+app.use(isAuth);
 
 app.use('/graphql', grahpqlHttp({
   schema: graphqlSchema,
